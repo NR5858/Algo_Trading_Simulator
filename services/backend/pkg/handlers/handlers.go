@@ -4,14 +4,15 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"time"
+
+	"github.com/NR5858/Algo_Trading_Simulator/pkg/models"
+	"github.com/NR5858/Algo_Trading_Simulator/pkg/order"
 )
 
-type Order struct {
-	Symbol    string `json:"symbol"`
-	Action    string `json:"action"`
-	Quantity  int    `json:"quantity"`
-	PriceType string `json:"priceType"`
-	Duration  string `json:"duration"`
+// getCurrentTimestamp returns the current timestamp with nanosecond precision
+func ogetCurrentTimestampInMillis() string {
+	return time.Now().Format("2006-01-02 15:04:05.000000")
 }
 
 func CreateOrder(w http.ResponseWriter, r *http.Request) {
@@ -25,17 +26,17 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var order Order
-	err := json.NewDecoder(r.Body).Decode(&order)
+	var o models.Order
+	err := json.NewDecoder(r.Body).Decode(&o)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	log.Printf("[%s] Received from client: %+v", ogetCurrentTimestampInMillis(), o)
 
-	// Process the order (e.g., save to database, send to message queue, etc.)
-	// For now, just log the order
-	log.Printf("Received from client: %+v", order)
+	fixMessage := order.ConvertToFix(&o)
+	log.Printf("[%s] Converted to FIX: %s", ogetCurrentTimestampInMillis(), fixMessage)
 
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(order)
+	json.NewEncoder(w).Encode(o)
 }

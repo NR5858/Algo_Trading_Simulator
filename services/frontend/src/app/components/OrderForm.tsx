@@ -32,8 +32,8 @@ const Action = ( {action, setAction }: ActionProps) => {
              value={action}
              onChange={e => setAction(e.target.value)}>
                 <option value="">Select Action</option>
-                <option value="Buy">Buy</option>
-                <option value="Sell">Sell</option>
+                <option value="BUY">Buy</option>
+                <option value="SELL">Sell</option>
             </select>
         </div>
     )
@@ -72,8 +72,8 @@ const PriceType = ({ priceType, setPriceType }: PriceTypeProps) => {
              value={priceType}
              onChange={e => setPriceType(e.target.value)}>
                 <option value="">Select Price Type</option>
-                <option value="Market">Market</option>
-                <option value="Limit">Limit</option>
+                <option value="MARKET">Market</option>
+                <option value="LIMIT">Limit</option>
             </select>
         </div>
     )
@@ -95,7 +95,7 @@ const Duration = ({ duration, setDuration }: DurationProps) => {
              value={duration}
              onChange={e => setDuration(e.target.value)}>
                 <option value="">Select Duration</option>
-                <option value="Day">Day</option>
+                <option value="DAY">Day</option>
                 <option value="IOC">IOC</option>
             </select>
         </div>
