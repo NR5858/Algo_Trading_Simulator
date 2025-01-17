@@ -117,7 +117,7 @@ export const OrderForm = () => {
     const [priceType, setPriceType] = useState('');
     const [duration, setDuration] = useState('');
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const orderData = {
             symbol,
             action,
@@ -127,7 +127,19 @@ export const OrderForm = () => {
         };
 
         // Send orderData to the server
-        console.log(orderData);
+        try {
+            const response = await fetch('http://localhost:8080/api/order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(orderData),
+            });
+            const result = await response.json();
+            console.log('Order created:', result);
+        } catch (error) {
+            console.error('Error creating order:', error);
+        }
     }
 
     return (
