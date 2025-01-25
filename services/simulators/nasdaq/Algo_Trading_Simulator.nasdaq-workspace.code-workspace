@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		}
+	],
+	"settings": {"rust-analyzer.linkedProjects": [
+            "services/simulators/nasdaq/Cargo.toml"
+		]}
+}

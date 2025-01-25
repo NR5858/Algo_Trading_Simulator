@@ -1,0 +1,10 @@
+[package]
+name = "nasdaq_simulator"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+lapin = "1.6"
+tokio = { version = "0.2", features = ["full"] }
+futures-util = "0.3"
+tokio-amqp = "0.1"
